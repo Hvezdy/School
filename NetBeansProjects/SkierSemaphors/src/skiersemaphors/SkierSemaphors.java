@@ -61,9 +61,8 @@ public class SkierSemaphors {
                         waitingIn.release();
                     }
                     for (int j = 0; j < capacity; j++) {
-                        boarding.release();
+                        boarding.acquire();
                     }
-                    Thread.sleep(1000);
                     System.out.println("Car going up the hill");
                     Thread.sleep(1000);
                     System.out.println("Car up on hill letting people out");
@@ -71,9 +70,8 @@ public class SkierSemaphors {
                         waitingOff.release();
                     }
                     for (int j = 0; j < capacity; j++) {
-                        leaving.release();
+                        leaving.acquire();
                     }
-                    Thread.sleep(1000);
                     System.out.println("Car is going DOWN");
                     Thread.sleep(1000);
                     
@@ -101,12 +99,12 @@ public class SkierSemaphors {
             System.out.println("Skier " + id + " is getting into car");
             int random = (int)(Math.random() * ( 500 ));
             Thread.sleep(random);
-            boarding.acquire();
+            boarding.release();
             System.out.println("Skier "+id+" boarded car");
             waitingOff.acquire();
             System.out.println("Skier "+id+" is preparing to leave car");
             Thread.sleep(random);
-            leaving.acquire();
+            leaving.release();
             System.out.println("Skier "+id+" left car");
             
             
